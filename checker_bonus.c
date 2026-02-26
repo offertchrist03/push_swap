@@ -6,11 +6,12 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 19:51:42 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/26 16:40:16 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:55:02 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+#include "push_swap.h"
 
 static int	is_checker_valid(int argc, char **argv)
 {
@@ -18,9 +19,7 @@ static int	is_checker_valid(int argc, char **argv)
 	int	n_flag;
 	int	has_flag_bench;
 
-	if (is_splitable_arg(argv[0]))
-		return (1);
-	if (argc < 2)
+	if (argc == 1 && !is_num(argv[0]))
 	{
 		ft_printf_error("Error\n");
 		return (-1);
@@ -32,7 +31,9 @@ static int	is_checker_valid(int argc, char **argv)
 		ft_printf_error("Error\n");
 		return (-1);
 	}
-	is_valid_args = valid_args((argc - 1), &argv[1]);
+	if (is_splitable_arg(argv[0]))
+		return (1);
+	is_valid_args = valid_args((argc), argv);
 	if (!(is_valid_args == 1))
 		return (is_valid_args);
 	return (1);
