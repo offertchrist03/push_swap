@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 19:51:42 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/26 16:34:42 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:40:16 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	is_checker_valid(int argc, char **argv)
 	int	n_flag;
 	int	has_flag_bench;
 
-	if (argc <= 1)
-		return (0);
+	if (is_splitable_arg(argv[0]))
+		return (1);
 	if (argc < 2)
 	{
 		ft_printf_error("Error\n");
@@ -116,9 +116,11 @@ int	main(int argc, char **argv)
 	int		is_valid;
 	int		disorder;
 
+	if (argc <= 1)
+		return (0);
 	is_valid = is_checker_valid((argc - 1), &argv[1]);
 	if (is_valid != 1)
-		return (is_valid);
+		return (-1);
 	stack_a = NULL;
 	stack_b = NULL;
 	splited = split_all_arg((argc - 1), &argv[1]);
