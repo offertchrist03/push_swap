@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 07:26:01 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/23 11:14:24 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:20:29 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ int	is_flag(char *str)
 	while (str[i])
 	{
 		if (!ft_isalpha(str[i]))
-			return (0);
+		{
+			if (!(str[i] == '-'
+					&& ft_isalpha(str[i - 1])
+					&& ft_isalpha(str[i + 1])))
+				return (0);
+		}
 		i++;
 	}
 	return (1);

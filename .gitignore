@@ -1,0 +1,8 @@
+./.gitignore
+./.vscode/
+./*.sh
+./*.txt
+./*.o
+./push_swap
+./checker
+./checker_linux
