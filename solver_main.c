@@ -6,11 +6,10 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 12:03:32 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/25 05:47:07 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 08:58:56 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
 static int	get_disorder(t_list *stack)
@@ -36,18 +35,24 @@ static int	get_disorder(t_list *stack)
 static int	manage_solver(t_list **stack, t_list **move_list, int disorder,
 		int strategy)
 {
-	if (strategy <= 0 || strategy > 3)
-		strategy = adapt_strategy(disorder);
-	if (ft_lstsize(*stack) <= 5)
-		*move_list = solver_minim(stack);
+	int	res;
+
+	if (strategy == 1)
+		*move_list = solver_simple(stack);
+	else if (strategy == 2)
+		*move_list = solver_medium(stack);
+	else if (strategy == 3)
+		*move_list = solver_complex(stack);
 	else
 	{
-		if (strategy == 1)
-			*move_list = solver_simple(stack);
-		else if (strategy == 2)
-			*move_list = solver_medium(stack);
+		if (ft_lstsize(*stack) <= 5)
+			*move_list = solver_minim(stack);
 		else
-			*move_list = solver_complex(stack);
+		{
+			strategy = adapt_strategy(disorder);
+			res = manage_solver(stack, move_list, disorder, strategy);
+			return (res);
+		}
 	}
 	if (!move_list)
 		return (0);

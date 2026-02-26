@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_stack_action.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainrakot <ainrakot@student.42antananari    +#+  +:+       +#+        */
+/*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:39:04 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/24 15:51:43 by ainrakot         ###   ########.fr       */
+/*   Updated: 2026/02/26 09:09:04 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

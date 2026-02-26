@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 15:04:55 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/25 05:35:00 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 09:09:34 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ int		stack_first_to_last(t_list **lst, char *move, t_list **move_list);
 int		stack_last_to_first(t_list **lst, char *move, t_list **move_list);
 int		stack_head_node_push(t_list **dest, t_list **src, char *move,
 			t_list **move_list);
-
-void	*lst_get_min(t_list *lst);
-void	*lst_get_max(t_list *lst);
-int		is_content_in_half(void *content, t_list *stack);
 
 char	*print_strategy(int strategy, int disorder);
 

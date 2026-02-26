@@ -6,7 +6,7 @@
 #    By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:17:48 by mahendri          #+#    #+#              #
-#    Updated: 2026/02/25 05:34:49 by mahendri         ###   ########.fr        #
+#    Updated: 2026/02/26 09:07:35 by mahendri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC = \
 	handle_stack_index.c \
 	handle_stack_move.c \
 	handle_stack_action.c \
-	handle_stack_utils.c \
 	handle_strategy.c \
 	handle_validation.c \
 	push_swap.c \
@@ -49,7 +48,6 @@ SRC_BONUS = \
 	handle_flag.c \
 	handle_stack.c \
 	handle_stack_action.c \
-	handle_stack_utils.c \
 	handle_validation.c \
 	push_swap_utils.c \
 	execute_instruction_0.c \
