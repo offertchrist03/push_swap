@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:50:44 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/20 19:05:30 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:16:51 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int	count_move(t_list *move_list, char *move)
 
 static int	print_move_count(t_list *move_list)
 {
-	if (!move_list)
-		return (0);
 	ft_printf_error("[bench] sa:\t%d\tsb:\t%d\tss:\t%d\tpa:\t%d\tpb:\t%d\n",
 		count_move(move_list, "sa"), count_move(move_list, "sb"),
 		count_move(move_list, "ss"), count_move(move_list, "pa"),
@@ -48,11 +46,6 @@ int	show_bench(t_list *move_list, int disorder, int strategy)
 {
 	char	*str_strategy;
 
-	if (!move_list || disorder < 0)
-	{
-		ft_printf_error("Error\n");
-		return (-1);
-	}
 	str_strategy = print_strategy(strategy, disorder);
 	ft_printf_error("[bench] disorder:\t");
 	print_disorder(disorder);

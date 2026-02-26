@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 12:04:23 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/25 08:40:21 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:50:06 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ static int	sort_three(t_list **stack_a, t_list **move_list)
 	return (1);
 }
 
-static int	sort_five(t_list **stack_a, t_list **stack_b, t_list **move_list)
+static void	sorting_five(t_list **stack_a, t_list **stack_b, t_list **move_list)
 {
 	int	max_b;
 	int	min_a;
 	int	max_a;
 
-	while (ft_lstsize(*stack_a) > 3)
-		stack_head_node_push(stack_b, stack_a, "pb", move_list);
-	sort_three(stack_a, move_list);
 	min_a = lst_get_min_index(*stack_a);
 	max_b = lst_get_max_index(*stack_b);
 	while (ft_lstsize(*stack_b) > 0)
@@ -65,8 +62,19 @@ static int	sort_five(t_list **stack_a, t_list **stack_b, t_list **move_list)
 				stack_first_to_last(stack_a, "ra", move_list);
 			stack_head_node_push(stack_a, stack_b, "pa", move_list);
 		}
+		min_a = lst_get_min_index(*stack_a);
 		max_b = lst_get_max_index(*stack_b);
 	}
+}
+
+static int	sort_five(t_list **stack_a, t_list **stack_b, t_list **move_list)
+{
+	int	min_a;
+
+	while (ft_lstsize(*stack_a) > 3)
+		stack_head_node_push(stack_b, stack_a, "pb", move_list);
+	sort_three(stack_a, move_list);
+	sorting_five(stack_a, stack_b, move_list);
 	min_a = lst_get_min_index(*stack_a);
 	while (((int *)(stack_at(*stack_a, 0)->content))[1] != min_a)
 		stack_last_to_first(stack_a, "rra", move_list);

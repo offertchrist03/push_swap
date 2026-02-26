@@ -107,7 +107,7 @@ shuf -i 0-9999 -n 500 > args.txt; ./push_swap $(cat args.txt)
 ./push_swap									# → (no output, no error)
 ./push_swap 42								# → (already sorted, no output)
 ./push_swap 8 1 2 4 --invalid				# → Error (invalid flag)
-./push_swap 8 1 2 4 --simple --complex		# → Error (invalid flag)
+./push_swap 8 1 2 4 --simple --complex		# → Error (multiple strategy flag)
 ```
 
 **checker examples:**
@@ -194,7 +194,7 @@ These thresholds match the complexity targets defined in the subject and were va
 | Author | Responsibilities |
 |---|---|
 | **mahendri** | Input validation and error handling, argument parsing (flags, overflow detection, duplicates), stack operation primitives (`sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`), disorder computation, flag parsing (`--simple`, `--medium`, `--complex`, `--adaptive`, `--bench`), strategy selection logic, benchmark output |
-| **ainrakot** | All four sorting algorithm implementations (`solver_simple`, `solver_medium`, `solver_complex`), solver orchestration (`solver_main`), checker bonus program (`checker`) |
+| **ainrakot** | All sorting algorithm implementations (`solver_simple`, `solver_medium`, `solver_complex`, `solver_minim`), solver orchestration (`solver_main`), checker bonus program (`checker`) |
 
 Both authors contributed to debugging, testing, and review of all parts of the project.
 
@@ -210,4 +210,3 @@ Both authors contributed to debugging, testing, and review of all parts of the p
 - Documentation — README structure, section wording, and complexity argument write-up
 - Code review — identifying edge cases in validation logic and flag parsing
 - Concept clarification — Big-O analysis of each algorithm in the Push_swap operation model
-# push_swap

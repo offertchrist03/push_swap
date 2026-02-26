@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 12:03:32 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/26 08:58:56 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:07:28 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	solver_main(int argc, char **argv, int has_flag_bench, int strategy)
 	{
 		if (!!split_all_arg(argc, argv))
 			ft_lstclear(&stack, free);
+		if (has_flag_bench)
+			show_bench(NULL, disorder, strategy);
 		return (0);
 	}
 	manage_solver(&stack, &move_list, disorder, strategy);
