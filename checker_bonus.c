@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 19:51:42 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/26 16:55:02 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:10:37 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,17 @@ static int	is_checker_valid(int argc, char **argv)
 	int	n_flag;
 	int	has_flag_bench;
 
-	if (argc == 1 && !is_num(argv[0]))
+	if (is_splitable_arg(argv[0]) == 1)
+		return (1);
+	if (argc == 1 && !is_num(argv[0])
+		&& is_splitable_arg(argv[0]) == -1)
 	{
 		ft_printf_error("Error\n");
 		return (-1);
 	}
+	is_valid_args = valid_args((argc), argv);
+	if (!(is_valid_args == 1))
+		return (is_valid_args);
 	n_flag = count_flag(argc, argv);
 	has_flag_bench = check_for_flag(argc, argv, "--bench");
 	if (n_flag > 0 || has_flag_bench)
@@ -31,11 +37,6 @@ static int	is_checker_valid(int argc, char **argv)
 		ft_printf_error("Error\n");
 		return (-1);
 	}
-	if (is_splitable_arg(argv[0]))
-		return (1);
-	is_valid_args = valid_args((argc), argv);
-	if (!(is_valid_args == 1))
-		return (is_valid_args);
 	return (1);
 }
 
@@ -68,43 +69,50 @@ static int	exec_move(t_list **stack_a, t_list **stack_b, char	*move)
 	return (1);
 }
 
-static int	read_and_exec(t_list **stack_a, t_list **stack_b, char **splited)
+static int	read_and_exec(t_list **stack_a, t_list **stack_b)
 {
 	char	*line;
+	int		size;
 
 	if (!stack_a || !*stack_a)
-	{
-		ft_printf_error("Error\n");
-		if (splited)
-			free_split(splited, split_len(splited));
-		return (0);
-	}
-	while (1)
+		return (-1);
+	size = ft_lstsize(*stack_a) - 1;
+	while (size > 0)
 	{
 		line = get_next_line(0);
 		if (!line)
 			break ;
 		if (exec_move(stack_a, stack_b, line) == -1)
-		{
-			ft_printf_error("Error\n");
 			return (-1);
-		}
 		free(line);
+		size--;
 	}
-	return (1);
+	line = get_next_line(0);
+	if (line == NULL)
+		return (1);
+	free(line);
+	return (0);
 }
 
-static int	show_ok_and_clear(int show,
-	t_list **stack_a, t_list **stack_b, char **splited)
+static int	show_ok_and_clear(t_list **stack_a, t_list **stack_b,
+	char **splited, int is_valid)
 {
-	if (show)
+	int		disorder;
+
+	if (ft_lstsize(*stack_a) <= 1)
+		disorder = 0;
+	else
+		disorder = compute_disorder(*stack_a);
+	if (is_valid == -1)
+		ft_printf_error("Error\n");
+	else if (is_valid == 1 && ft_lstsize(*stack_b) == 0 && disorder <= 0)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
 	ft_lstclear(stack_a, del_node_content);
-	if (stack_b)
+	if (stack_b && ft_lstsize(*stack_b) > 0)
 		ft_lstclear(stack_b, del_node_content);
-	if (splited)
+	if (splited && split_len(splited) > 0)
 		free_split(splited, split_len(splited));
 	return (1);
 }
@@ -115,13 +123,12 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	int		is_valid;
-	int		disorder;
 
 	if (argc <= 1)
 		return (0);
 	is_valid = is_checker_valid((argc - 1), &argv[1]);
 	if (is_valid != 1)
-		return (-1);
+		return (is_valid);
 	stack_a = NULL;
 	stack_b = NULL;
 	splited = split_all_arg((argc - 1), &argv[1]);
@@ -129,11 +136,7 @@ int	main(int argc, char **argv)
 		stack_a = gen_stack(split_len(splited), splited);
 	else
 		stack_a = gen_stack((argc - 1), &argv[1]);
-	is_valid = read_and_exec(&stack_a, &stack_b, splited);
-	if (is_valid <= 0)
-		return (-1);
-	disorder = compute_disorder(stack_a);
-	show_ok_and_clear(ft_lstsize(stack_b) == 0 && disorder == 0,
-		&stack_a, &stack_b, splited);
-	return (0);
+	is_valid = read_and_exec(&stack_a, &stack_b);
+	show_ok_and_clear(&stack_a, &stack_b, splited, is_valid);
+	return (is_valid);
 }

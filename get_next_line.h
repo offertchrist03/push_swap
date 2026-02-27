@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:38:22 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/23 13:21:41 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/27 13:38:41 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 1
 # endif
 
 # if BUFFER_SIZE < 0
