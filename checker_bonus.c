@@ -6,12 +6,11 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 19:51:42 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/27 15:45:13 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:54:56 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
 static int	is_checker_valid(int argc, char **argv)
