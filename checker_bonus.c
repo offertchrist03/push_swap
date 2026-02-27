@@ -6,11 +6,12 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 19:51:42 by ainrakot          #+#    #+#             */
-/*   Updated: 2026/02/27 14:10:37 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:45:13 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
 static int	is_checker_valid(int argc, char **argv)
@@ -72,25 +73,27 @@ static int	exec_move(t_list **stack_a, t_list **stack_b, char	*move)
 static int	read_and_exec(t_list **stack_a, t_list **stack_b)
 {
 	char	*line;
-	int		size;
+	int		instruction;
+	int		disorder;
 
 	if (!stack_a || !*stack_a)
 		return (-1);
-	size = ft_lstsize(*stack_a) - 1;
-	while (size > 0)
+	instruction = 0;
+	disorder = compute_disorder(*stack_a);
+	while (1)
 	{
 		line = get_next_line(0);
 		if (!line)
 			break ;
+		instruction++;
 		if (exec_move(stack_a, stack_b, line) == -1)
 			return (-1);
 		free(line);
-		size--;
 	}
-	line = get_next_line(0);
-	if (line == NULL)
+	if (disorder == 0 && instruction > 0)
+		return (0);
+	if (ft_lstsize(*stack_b) == 0)
 		return (1);
-	free(line);
 	return (0);
 }
 
@@ -99,10 +102,7 @@ static int	show_ok_and_clear(t_list **stack_a, t_list **stack_b,
 {
 	int		disorder;
 
-	if (ft_lstsize(*stack_a) <= 1)
-		disorder = 0;
-	else
-		disorder = compute_disorder(*stack_a);
+	disorder = compute_disorder(*stack_a);
 	if (is_valid == -1)
 		ft_printf_error("Error\n");
 	else if (is_valid == 1 && ft_lstsize(*stack_b) == 0 && disorder <= 0)
@@ -138,5 +138,7 @@ int	main(int argc, char **argv)
 		stack_a = gen_stack((argc - 1), &argv[1]);
 	is_valid = read_and_exec(&stack_a, &stack_b);
 	show_ok_and_clear(&stack_a, &stack_b, splited, is_valid);
-	return (is_valid);
+	if (is_valid == 1)
+		return (0);
+	return (1);
 }

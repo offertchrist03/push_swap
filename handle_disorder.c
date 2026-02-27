@@ -6,10 +6,11 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:12:20 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/20 16:09:08 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:43:48 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
 void	print_disorder(int disorder)
@@ -28,7 +29,7 @@ void	print_disorder(int disorder)
 	ft_printnbr(fractional_part, 2);
 }
 
-int	compute_disorder(t_list *stack)
+static int	calculate_disorder(t_list *stack)
 {
 	double	res;
 	double	mistakes;
@@ -54,4 +55,15 @@ int	compute_disorder(t_list *stack)
 	}
 	res = (mistakes / total_pairs) * 10000;
 	return (res);
+}
+
+int	compute_disorder(t_list *stack)
+{
+	int	disorder;
+
+	disorder = 0;
+	if (ft_lstsize(stack) == 1)
+		return (0);
+	disorder = calculate_disorder(stack);
+	return (disorder);
 }
